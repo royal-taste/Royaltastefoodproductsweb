@@ -1,6 +1,6 @@
-import { Crown, MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { Link } from 'react-router';
-import NewsletterSignup from './NewsletterSignup';
+import RoyalTasteLogo from '/ROYAL LOGO ONLY.svg';
 
 export default function Footer() {
   return (
@@ -10,13 +10,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-amber-700 to-orange-600 rounded-lg flex items-center justify-center">
-                <Crown className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold">Royal Taste</h1>
-                <p className="text-xs text-gray-400 -mt-1">Food Products</p>
-              </div>
+              <img src={RoyalTasteLogo} alt="Royal Taste Logo" className="h-12 w-auto object-contain" />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
               Authentic Kerala traditional food products from Thiruvazhiyode, Palakkad. 
@@ -46,8 +40,6 @@ export default function Footer() {
               <li><Link to="/about" className="text-gray-300 hover:text-amber-400 transition-colors">About Us</Link></li>
               <li><Link to="/products" className="text-gray-300 hover:text-amber-400 transition-colors">Products</Link></li>
               <li><Link to="/contact" className="text-gray-300 hover:text-amber-400 transition-colors">Contact</Link></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-amber-400 transition-colors">Terms of Service</a></li>
             </ul>
           </div>
 
@@ -58,8 +50,10 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm">
-                  Thiruvazhiyode<br />
-                  Palakkad, Kerala, India
+                SREEBHADRA GROUP OF CONCERNS<br />
+                8/125A, SB COMPLEX, PALAKKAD MAIN ROAD,<br />
+                NEAR SREEKRISHNAPURAM POLICE STATION,<br />
+                THIRUVAZHIYODE PO, Palakkad, Kerala-679514
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -71,18 +65,25 @@ export default function Footer() {
                 <p className="text-gray-300 text-sm">info@royaltastefoods.com</p>
               </div>
             </div>
-            
-            {/* Newsletter Signup */}
-            <div className="mt-6">
-              <NewsletterSignup />
-            </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Royal Taste Food Products. All rights reserved.
+            © 2025 Royal Taste Food Products. All rights reserved.
           </p>
+          <p className="text-gray-400 text-sm mt-2">
+            SREEBHADRA GROUP OF CONCERNS<br />
+            8/125A, SB COMPLEX, PALAKKAD MAIN ROAD,<br />
+            NEAR SREEKRISHNAPURAM POLICE STATION,<br />
+            THIRUVAZHIYODE PO, Palakkad, Kerala-679514
+          </p>
+          <div className="flex items-center justify-center gap-2 mt-2">
+            <img src="/fssai-seeklogo.png" alt="FSSAI Logo" className="h-6 w-auto" />
+            <p className="text-gray-400 text-sm">
+              FSSAI License No: 11325009000514
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -7,8 +7,7 @@ interface FormErrors {
 
 export function useContactForm() {
   const [formData, setFormData] = useState<ContactFormType>({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     phone: '',
     subject: 'Product Inquiry',
@@ -65,8 +64,7 @@ export function useContactForm() {
       if (result.success) {
         setSubmitStatus('success');
         setFormData({
-          firstName: '',
-          lastName: '',
+          name: '',
           email: '',
           phone: '',
           subject: 'Product Inquiry',

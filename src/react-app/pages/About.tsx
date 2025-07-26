@@ -24,7 +24,7 @@ export default function About() {
             <div>
               <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Heritage Story</h2>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Royal Taste Food Products was born from a deep love for Kerala's rich culinary traditions. 
+                Royal Taste Food Products, a venture of Sree Bhadra Group of Concerns, was born from a deep love for Kerala's rich culinary traditions. 
                 Based in the fertile lands of Thiruvazhiyode, Palakkad, we have dedicated ourselves to 
                 preserving and sharing the authentic flavors that define Kerala cuisine.
               </p>
@@ -202,8 +202,29 @@ export default function About() {
                 <MapPin className="w-6 h-6 text-amber-700 flex-shrink-0" />
                 <div>
                   <div className="font-semibold text-gray-800">Royal Taste Food Products</div>
-                  <div className="text-gray-600">Thiruvazhiyode, Palakkad, Kerala, India</div>
+                  <div className="text-gray-600">
+                    SREEBHADRA GROUP OF CONCERNS<br />
+                    8/125A, SB COMPLEX, PALAKKAD MAIN ROAD,<br />
+                    NEAR SREEKRISHNAPURAM POLICE STATION,<br />
+                    THIRUVAZHIYODE PO, Palakkad, Kerala-679514
+                  </div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <img src="/fssai-seeklogo.png" alt="FSSAI Logo" className="h-4 w-auto" />
+                    <span className="text-sm text-amber-700">FSSAI License No: 11325009000514</span>
+                  </div>
                 </div>
+              </div>
+              <div className="mt-8 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.86902120656273!2d76.38942540807135!3d10.89487435219784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7d71f2997f245%3A0x1e37e2e9e677ddaf!2sRoyal%20Taste%20Restaurant!5e0!3m2!1sen!2sin!4v1753535659644!5m2!1sen!2sin"
+                  width="100%"
+                  height="350"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Royal Taste Location"
+                ></iframe>
               </div>
             </div>
             <div className="bg-gradient-to-br from-amber-100 to-orange-100 rounded-2xl p-8">

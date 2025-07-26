@@ -57,39 +57,21 @@ export default function Contact() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                    <input 
-                      type="text" 
-                      value={formData.firstName}
-                      onChange={(e) => updateField('firstName', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all ${
-                        errors.firstName ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                      }`}
-                      placeholder="Enter your first name"
-                      required
-                    />
-                    {errors.firstName && (
-                      <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                    <input 
-                      type="text" 
-                      value={formData.lastName}
-                      onChange={(e) => updateField('lastName', e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all ${
-                        errors.lastName ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                      }`}
-                      placeholder="Enter your last name"
-                      required
-                    />
-                    {errors.lastName && (
-                      <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>
-                    )}
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                  <input 
+                    type="text" 
+                    value={formData.name}
+                    onChange={(e) => updateField('name', e.target.value)}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all ${
+                      errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter your full name"
+                    required
+                  />
+                  {errors.name && (
+                    <p className="text-red-600 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
                 
                 <div>
@@ -116,7 +98,7 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={(e) => updateField('phone', e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                    placeholder="+91 98765 43210"
+                    placeholder="Enter your phone number"
                   />
                 </div>
                 
@@ -185,18 +167,26 @@ export default function Contact() {
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Contact Information</h2>
                 
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Our Location</h3>
-                      <p className="text-gray-600">
-                        Royal Taste Food Products<br />
-                        Thiruvazhiyode<br />
-                        Palakkad, Kerala, India
-                      </p>
-                    </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+                    <p className="text-gray-300 text-sm">
+                      SREEBHADRA GROUP OF CONCERNS<br />
+                      8/125A, SB COMPLEX, PALAKKAD MAIN ROAD,<br />
+                      NEAR SREEKRISHNAPURAM POLICE STATION,<br />
+                      THIRUVAZHIYODE PO, Palakkad, Kerala-679514
+                    </p>
+                  </div>
+                  <div className="my-8 rounded-lg overflow-hidden shadow-lg">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.86902120656273!2d76.38942540807135!3d10.89487435219784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7d71f2997f245%3A0x1e37e2e9e677ddaf!2sRoyal%20Taste%20Restaurant!5e0!3m2!1sen!2sin!4v1753535659644!5m2!1sen!2sin"
+                      width="100%"
+                      height="350"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Royal Taste Location"
+                    ></iframe>
                   </div>
                   
                   <div className="flex items-start gap-4">
@@ -206,21 +196,31 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-gray-800 mb-1">Phone</h3>
                       <p className="text-gray-600">
-                        Main: +91 98765 43210<br />
                         WhatsApp: +91 98765 43210
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-white" />
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-blue-500 rounded flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-amber-400 flex-shrink-0" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
                       <p className="text-gray-600">
-                        General: info@royaltastefoods.com<br />
-                        Orders: orders@royaltastefoods.com
+                        info@royaltastefoods.com<br />
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center flex-shrink-0">
+                      <img src="/fssai-seeklogo.png" alt="FSSAI" className="w-7 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-1">FSSAI Certification</h3>
+                      <p className="text-gray-600 text-sm">
+                        License No: 11325009000514
                       </p>
                     </div>
                   </div>
@@ -234,7 +234,7 @@ export default function Contact() {
                       <p className="text-gray-600">
                         Monday - Saturday: 8:00 AM - 6:00 PM<br />
                         Sunday: Closed<br />
-                        <span className="text-sm text-amber-700">Kerala Time (IST)</span>
+                        <span className="text-sm text-amber-700">IST</span>
                       </p>
                     </div>
                   </div>
@@ -271,7 +271,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">How long do the products stay fresh?</h4>
-                    <p className="text-gray-600">Our products have varying shelf lives. Each product comes with clear expiry dates and storage instructions.</p>
+                    <p className="text-gray-600">Our products have a shelf life of six months. Each product comes with clear packaging dates.</p>
                   </div>
                 </div>
               </div>

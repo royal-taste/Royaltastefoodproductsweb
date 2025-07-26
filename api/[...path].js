@@ -6,14 +6,10 @@ import { sql } from '@vercel/postgres';
 
 // Contact form validation schema
 const ContactFormSchema = z.object({
-  firstName: z.string()
-    .min(2, "First name must be at least 2 characters")
-    .max(50, "First name must be less than 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "First name can only contain letters and spaces"),
-  lastName: z.string()
-    .min(2, "Last name must be at least 2 characters")
-    .max(50, "Last name must be less than 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "Last name can only contain letters and spaces"),
+  name: z.string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
   email: z.string()
     .email("Please enter a valid email address")
     .max(100, "Email must be less than 100 characters"),
@@ -105,8 +101,7 @@ const initializeDatabase = async () => {
     await sql`
       CREATE TABLE IF NOT EXISTS contact_submissions (
         id SERIAL PRIMARY KEY,
-        first_name VARCHAR(50) NOT NULL,
-        last_name VARCHAR(50) NOT NULL,
+        name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL,
         phone VARCHAR(20),
         subject VARCHAR(100) NOT NULL,
@@ -131,8 +126,8 @@ app.post('/api/contact', rateLimit(5, 60000), zValidator('json', ContactFormSche
     
     // Insert into database
     const result = await sql`
-      INSERT INTO contact_submissions (first_name, last_name, email, phone, subject, message)
-      VALUES (${data.firstName}, ${data.lastName}, ${data.email}, ${data.phone || null}, ${data.subject}, ${data.message})
+      INSERT INTO contact_submissions (name, email, phone, subject, message)
+      VALUES (${data.name}, ${data.email}, ${data.phone || null}, ${data.subject}, ${data.message})
       RETURNING id;
     `;
 

@@ -2,14 +2,10 @@ import z from "zod";
 
 // Contact form validation schema with enhanced sanitization
 export const ContactFormSchema = z.object({
-  firstName: z.string()
-    .min(2, "First name must be at least 2 characters")
-    .max(50, "First name must be less than 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "First name can only contain letters and spaces"),
-  lastName: z.string()
-    .min(2, "Last name must be at least 2 characters")
-    .max(50, "Last name must be less than 50 characters")
-    .regex(/^[a-zA-Z\s]+$/, "Last name can only contain letters and spaces"),
+  name: z.string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s]+$/, "Name can only contain letters and spaces"),
   email: z.string()
     .email("Please enter a valid email address")
     .max(100, "Email must be less than 100 characters"),

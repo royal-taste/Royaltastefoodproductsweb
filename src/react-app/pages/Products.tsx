@@ -371,6 +371,28 @@ export default function Products() {
               </div>
             ))}
           </div>
+          
+          {/* FSSAI Certification Trust Indicator */}
+          <div className="mt-16 text-center bg-white rounded-2xl shadow-lg p-8 border border-amber-100">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <img src="/fssai-seeklogo.png" alt="FSSAI Logo" className="h-8 w-auto" />
+              <h3 className="text-xl font-bold text-gray-800">FSSAI Certified Products</h3>
+            </div>
+            <p className="text-gray-600 mb-4">
+              All our traditional Kerala food products are manufactured under FSSAI License No: 11325009000514, 
+              ensuring the highest standards of food safety and quality.
+            </p>
+            <div className="flex items-center justify-center gap-2 text-sm text-amber-700 font-medium">
+              <span>✓</span>
+              <span>Quality Assured</span>
+              <span>•</span>
+              <span>✓</span>
+              <span>Safety Certified</span>
+              <span>•</span>
+              <span>✓</span>
+              <span>Traditional Authenticity</span>
+            </div>
+          </div>
         </div>
       </section>
 
