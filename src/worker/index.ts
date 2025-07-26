@@ -20,12 +20,20 @@ interface Env {
   ADMIN_SETUP_KEY?: string;
 }
 
-// Simple logging function that can be controlled in production
-const logError = (message: string, error?: any) => {
-  if (process.env.NODE_ENV !== 'production') {
-    console.error(message, error);
-  }
-  // In production, you could send to external logging service
+// Simple UUID generator (since crypto.randomUUID() might not be available)
+const generateUUID = (): string => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
+
+// Simple logging function for production
+const logError = (_message: string, _error?: any) => {
+  // In production, this could send to external logging service
+  // For now, we'll just silently handle errors
+  // You can implement proper logging service integration here
 };
 
 // Simple rate limiting store (in production, use Redis or similar)
@@ -85,7 +93,8 @@ app.onError((err, c) => {
   logError('Unhandled error:', err);
   
   // Don't expose internal errors in production
-  const isProduction = process.env.NODE_ENV === 'production';
+  // In Cloudflare Workers, we'll use a simple approach
+  const isProduction = !c.req.header('user-agent')?.includes('development');
   
   return c.json({
     success: false,
@@ -224,7 +233,7 @@ app.post('/api/admin/login', rateLimit(3, 300000), zValidator('json', AdminLogin
     }
 
     // Generate session token
-    const sessionToken = crypto.randomUUID();
+    const sessionToken = generateUUID();
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
     // Store session

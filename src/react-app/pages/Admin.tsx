@@ -33,25 +33,10 @@ export default function Admin() {
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  const initializeProducts = async () => {
-    try {
-      await fetch('/api/admin/init-products', { method: 'POST' });
-    } catch (error) {
-      // Log error only in development
-      if (import.meta.env.DEV) {
-        console.error('Error initializing products:', error);
-      }
-      setErrorMessage('Error initializing products');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const fetchProducts = async () => {
     try {
@@ -65,7 +50,6 @@ export default function Admin() {
       if (import.meta.env.DEV) {
         console.error('Error fetching products:', error);
       }
-      setErrorMessage('Error fetching products');
     } finally {
       setIsLoading(false);
     }

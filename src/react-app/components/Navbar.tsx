@@ -1,121 +1,107 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router';
-import { Menu, X, Crown, ShoppingCart, User, LogOut } from 'lucide-react';
+import { Link } from 'react-router';
+import { Menu, X, Crown, ShoppingCart } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getTotalItems } = useCart();
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Products', path: '/products' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const isActive = (path: string) => location.pathname === path;
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+    <nav className="bg-white shadow-lg border-b border-amber-100 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-700 to-orange-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-              <Crown className="w-6 h-6 text-white" />
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-amber-600 to-orange-500 rounded-lg flex items-center justify-center">
+              <Crown className="w-5 h-5 text-white" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800">Royal Taste</h1>
-              <p className="text-xs text-gray-500 -mt-1">Food Products</p>
-            </div>
+            <span className="text-xl font-bold text-gray-800">Royal Taste</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`font-medium transition-colors relative ${
-                  isActive(link.path)
-                    ? 'text-amber-700'
-                    : 'text-gray-700 hover:text-amber-700'
-                }`}
-              >
-                {link.name}
-                {isActive(link.path) && (
-                  <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-amber-700 rounded-full"></div>
-                )}
-              </Link>
-            ))}
-            
-            {/* Cart Icon */}
-            <Link
-              to="/cart"
-              className={`font-medium transition-colors relative p-2 ${
-                isActive('/cart')
-                  ? 'text-amber-700'
-                  : 'text-gray-700 hover:text-amber-700'
-              }`}
-            >
+            <Link to="/" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              Home
+            </Link>
+            <Link to="/about" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              About
+            </Link>
+            <Link to="/products" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              Products
+            </Link>
+            <Link to="/contact" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              Contact
+            </Link>
+            <Link to="/admin" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              Admin
+            </Link>
+          </div>
+
+          {/* Cart Icon */}
+          <div className="flex items-center space-x-4">
+            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-amber-600 transition-colors">
               <ShoppingCart className="w-6 h-6" />
               {getTotalItems() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-amber-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-amber-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {getTotalItems()}
                 </span>
               )}
             </Link>
 
-            {/* User Authentication */}
-            {/* Removed user authentication UI */}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+            {/* Mobile menu button */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-amber-700 transition-colors"
+              onClick={toggleMenu}
+              className="md:hidden p-2 text-gray-700 hover:text-amber-600 transition-colors"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`font-medium transition-colors ${
-                    isActive(link.path)
-                      ? 'text-amber-700'
-                      : 'text-gray-700 hover:text-amber-700'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+        {isMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-amber-100">
               <Link
-                to="/cart"
-                onClick={() => setIsOpen(false)}
-                className={`font-medium transition-colors flex items-center gap-2 ${
-                  isActive('/cart')
-                    ? 'text-amber-700'
-                    : 'text-gray-700 hover:text-amber-700'
-                }`}
+                to="/"
+                className="block px-3 py-2 text-gray-700 hover:text-amber-600 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
               >
-                <ShoppingCart className="w-5 h-5" />
-                Cart {getTotalItems() > 0 && `(${getTotalItems()})`}
+                Home
               </Link>
-              
-              {/* Removed user authentication UI */}
+              <Link
+                to="/about"
+                className="block px-3 py-2 text-gray-700 hover:text-amber-600 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                to="/products"
+                className="block px-3 py-2 text-gray-700 hover:text-amber-600 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Products
+              </Link>
+              <Link
+                to="/contact"
+                className="block px-3 py-2 text-gray-700 hover:text-amber-600 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link
+                to="/admin"
+                className="block px-3 py-2 text-gray-700 hover:text-amber-600 transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin
+              </Link>
             </div>
           </div>
         )}
