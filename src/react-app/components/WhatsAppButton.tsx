@@ -8,7 +8,7 @@ interface WhatsAppButtonProps {
 }
 
 export default function WhatsAppButton({ 
-  phoneNumber = "9061854239", 
+  phoneNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "9061854239", 
   message = "Hello! I'm interested in Royal Taste Food Products.", 
   className = "",
   children

@@ -43,7 +43,10 @@ export default function AdminSetup() {
         setMessage(result.message || 'Failed to setup admin access');
       }
     } catch (error) {
-      console.error('Admin setup error:', error);
+      // Log error only in development
+      if (import.meta.env.DEV) {
+        console.error('Admin setup error:', error);
+      }
       setSetupStatus('error');
       setMessage('Error setting up admin access');
     } finally {

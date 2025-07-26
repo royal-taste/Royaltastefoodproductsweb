@@ -250,12 +250,12 @@ const products = [
 
 const categories = ["All", "Puttupodi", "Powders", "Rava", "Ready Mixes"];
 
-// 2. Add dynamic image resolver using import.meta.glob
+// Add dynamic image resolver
 const imageModules = import.meta.glob('../../product-images/*.{jpg,JPG,jpeg,png}', { eager: true, as: 'url' });
 function getImageUrl(filename: string): string {
   const entry = Object.entries(imageModules).find(([path]) => path.toLowerCase().endsWith(`/${filename.toLowerCase()}`));
   if (!entry) {
-    console.warn('Image not found:', filename, imageModules);
+    // Return a fallback image instead of logging
     return '/placeholder.jpg';
   }
   return entry[1] as string;

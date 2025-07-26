@@ -29,21 +29,27 @@ interface Product {
 
 export default function Admin() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchProducts();
-    initializeProducts();
   }, []);
 
   const initializeProducts = async () => {
     try {
       await fetch('/api/admin/init-products', { method: 'POST' });
     } catch (error) {
-      console.error('Error initializing products:', error);
+      // Log error only in development
+      if (import.meta.env.DEV) {
+        console.error('Error initializing products:', error);
+      }
+      setErrorMessage('Error initializing products');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,7 +61,11 @@ export default function Admin() {
         setProducts(data.data);
       }
     } catch (error) {
-      console.error('Error fetching products:', error);
+      // Log error only in development
+      if (import.meta.env.DEV) {
+        console.error('Error fetching products:', error);
+      }
+      setErrorMessage('Error fetching products');
     } finally {
       setIsLoading(false);
     }

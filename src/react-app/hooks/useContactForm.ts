@@ -78,7 +78,10 @@ export function useContactForm() {
         return false;
       }
     } catch (error) {
-      console.error('Form submission error:', error);
+      // Log error only in development
+      if (import.meta.env.DEV) {
+        console.error('Form submission error:', error);
+      }
       setSubmitStatus('error');
       return false;
     } finally {

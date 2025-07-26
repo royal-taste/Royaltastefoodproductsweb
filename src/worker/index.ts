@@ -15,6 +15,58 @@ interface AdminUser {
   updated_at: string;
 }
 
+interface Env {
+  DB: any;
+  ADMIN_SETUP_KEY?: string;
+}
+
+// Simple logging function that can be controlled in production
+const logError = (message: string, error?: any) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(message, error);
+  }
+  // In production, you could send to external logging service
+};
+
+// Simple rate limiting store (in production, use Redis or similar)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Rate limiting middleware
+const rateLimit = (maxRequests: number, windowMs: number) => {
+  return async (c: any, next: any) => {
+    const ip = c.req.header('cf-connecting-ip') || c.req.header('x-forwarded-for') || 'unknown';
+    const now = Date.now();
+    const key = `${ip}:${c.req.path}`;
+    
+    const record = rateLimitStore.get(key);
+    
+    if (!record || now > record.resetTime) {
+      rateLimitStore.set(key, { count: 1, resetTime: now + windowMs });
+    } else if (record.count >= maxRequests) {
+      return c.json({
+        success: false,
+        message: 'Too many requests. Please try again later.'
+      }, 429);
+    } else {
+      record.count++;
+    }
+    
+    return next();
+  };
+};
+
+// Security headers middleware
+const securityHeaders = async (c: any, next: any) => {
+  // Add security headers
+  c.header('X-Content-Type-Options', 'nosniff');
+  c.header('X-Frame-Options', 'DENY');
+  c.header('X-XSS-Protection', '1; mode=block');
+  c.header('Referrer-Policy', 'strict-origin-when-cross-origin');
+  c.header('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  
+  return next();
+};
+
 const app = new Hono<{ 
   Bindings: Env;
   Variables: {
@@ -24,6 +76,25 @@ const app = new Hono<{
 
 // Enable CORS for all routes
 app.use('*', cors());
+
+// Add security headers to all routes
+app.use('*', securityHeaders);
+
+// Global error handler
+app.onError((err, c) => {
+  logError('Unhandled error:', err);
+  
+  // Don't expose internal errors in production
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  return c.json({
+    success: false,
+    message: isProduction 
+      ? 'An unexpected error occurred. Please try again later.'
+      : err.message,
+    ...(isProduction ? {} : { stack: err.stack })
+  }, 500);
+});
 
 // Admin login schema
 const AdminLoginSchema = z.object({
@@ -66,7 +137,7 @@ const adminAuthMiddleware = async (c: any, next: any) => {
 };
 
 // Contact form submission endpoint
-app.post('/api/contact', zValidator('json', ContactFormSchema), async (c) => {
+app.post('/api/contact', rateLimit(5, 60000), zValidator('json', ContactFormSchema), async (c) => {
   try {
     const data = c.req.valid('json');
     
@@ -94,7 +165,7 @@ app.post('/api/contact', zValidator('json', ContactFormSchema), async (c) => {
     });
 
   } catch (error) {
-    console.error('Contact form error:', error);
+    logError('Contact form error:', error);
     return c.json({
       success: false,
       message: 'Sorry, there was an error sending your message. Please try again.'
@@ -117,7 +188,7 @@ app.get('/api/contact', async (c) => {
     });
 
   } catch (error) {
-    console.error('Error fetching contact submissions:', error);
+    logError('Error fetching contact submissions:', error);
     return c.json({
       success: false,
       message: 'Error fetching contact submissions'
@@ -126,7 +197,7 @@ app.get('/api/contact', async (c) => {
 });
 
 // Admin authentication endpoints
-app.post('/api/admin/login', zValidator('json', AdminLoginSchema), async (c) => {
+app.post('/api/admin/login', rateLimit(3, 300000), zValidator('json', AdminLoginSchema), async (c) => {
   try {
     const { username, password } = c.req.valid('json');
 
@@ -181,7 +252,7 @@ app.post('/api/admin/login', zValidator('json', AdminLoginSchema), async (c) => 
     });
 
   } catch (error) {
-    console.error('Admin login error:', error);
+    logError('Admin login error:', error);
     return c.json({
       success: false,
       message: 'Login failed'
@@ -226,9 +297,9 @@ app.get('/api/admin/me', adminAuthMiddleware, async (c) => {
 // Admin endpoints
 app.get('/api/admin/products', adminAuthMiddleware, async (c) => {
   try {
-    const user = c.get('user');
-    if (!user) {
-      return c.json({ success: false, message: 'User not found' }, 401);
+    const admin = c.get('admin');
+    if (!admin) {
+      return c.json({ success: false, message: 'Admin not found' }, 401);
     }
     
     // Admin is already authenticated via adminAuthMiddleware
@@ -243,7 +314,7 @@ app.get('/api/admin/products', adminAuthMiddleware, async (c) => {
       data: result.results
     });
   } catch (error) {
-    console.error('Error fetching products:', error);
+    logError('Error fetching products:', error);
     return c.json({
       success: false,
       message: 'Error fetching products'
@@ -254,9 +325,9 @@ app.get('/api/admin/products', adminAuthMiddleware, async (c) => {
 // Initialize products data (run once)
 app.post('/api/admin/init-products', adminAuthMiddleware, async (c) => {
   try {
-    const user = c.get('user');
-    if (!user) {
-      return c.json({ success: false, message: 'User not found' }, 401);
+    const admin = c.get('admin');
+    if (!admin) {
+      return c.json({ success: false, message: 'Admin not found' }, 401);
     }
     
     // Admin is already authenticated via adminAuthMiddleware
@@ -312,10 +383,68 @@ app.post('/api/admin/init-products', adminAuthMiddleware, async (c) => {
       message: 'Products initialized successfully'
     });
   } catch (error) {
-    console.error('Error initializing products:', error);
+    logError('Error initializing products:', error);
     return c.json({
       success: false,
       message: 'Error initializing products'
+    }, 500);
+  }
+});
+
+// Secure admin setup endpoint (run once in production)
+app.post('/api/admin/setup', zValidator('json', z.object({
+  username: z.string().min(3),
+  password: z.string().min(8),
+  setupKey: z.string()
+})), async (c) => {
+  try {
+    const { username, password, setupKey } = c.req.valid('json');
+    
+    // Verify setup key from environment variable
+    const expectedSetupKey = c.env.ADMIN_SETUP_KEY;
+    if (!expectedSetupKey || setupKey !== expectedSetupKey) {
+      return c.json({
+        success: false,
+        message: 'Invalid setup key'
+      }, 401);
+    }
+
+    // Check if admin already exists
+    const existingAdmin = await c.env.DB.prepare(`
+      SELECT id FROM admin_users WHERE username = ?
+    `).bind(username).first();
+
+    if (existingAdmin) {
+      return c.json({
+        success: false,
+        message: 'Admin user already exists'
+      }, 400);
+    }
+
+    // Hash password
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    // Create admin user
+    const result = await c.env.DB.prepare(`
+      INSERT INTO admin_users (username, password_hash)
+      VALUES (?, ?)
+    `).bind(username, passwordHash).run();
+
+    if (!result.success) {
+      throw new Error('Failed to create admin user');
+    }
+
+    return c.json({
+      success: true,
+      message: 'Admin user created successfully',
+      data: { id: result.meta.last_row_id }
+    });
+
+  } catch (error) {
+    logError('Admin setup error:', error);
+    return c.json({
+      success: false,
+      message: 'Failed to create admin user'
     }, 500);
   }
 });
