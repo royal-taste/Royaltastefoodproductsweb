@@ -4,8 +4,11 @@ import { zValidator } from '@hono/zod-validator';
 import { ContactFormSchema } from '../shared/types';
 
 interface Env {
-  DB: any;
+  DB?: any;
 }
+
+// Simple in-memory storage for contact submissions (for Vercel deployment)
+const contactSubmissions: any[] = [];
 
 // Simple logging function for production
 const logError = (_message: string, _error?: any) => {
@@ -85,27 +88,20 @@ app.post('/api/contact', rateLimit(5, 60000), zValidator('json', ContactFormSche
   try {
     const data = c.req.valid('json');
     
-    // Insert into database
-    const result = await c.env.DB.prepare(`
-      INSERT INTO contact_submissions (first_name, last_name, email, phone, subject, message)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `).bind(
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.phone || null,
-      data.subject,
-      data.message
-    ).run();
-
-    if (!result.success) {
-      throw new Error('Failed to save contact submission');
-    }
+    // Store in memory (for Vercel deployment)
+    const submission = {
+      id: Date.now(),
+      ...data,
+      created_at: new Date().toISOString(),
+      status: 'new'
+    };
+    
+    contactSubmissions.push(submission);
 
     return c.json({
       success: true,
       message: 'Thank you for your message! We will get back to you soon.',
-      data: { id: result.meta.last_row_id }
+      data: { id: submission.id }
     });
 
   } catch (error) {
@@ -120,15 +116,10 @@ app.post('/api/contact', rateLimit(5, 60000), zValidator('json', ContactFormSche
 // Get all contact submissions
 app.get('/api/contact', async (c) => {
   try {
-    const result = await c.env.DB.prepare(`
-      SELECT * FROM contact_submissions 
-      ORDER BY created_at DESC
-    `).all();
-
     return c.json({
       success: true,
       message: 'Contact submissions retrieved successfully',
-      data: result.results
+      data: contactSubmissions
     });
 
   } catch (error) {
