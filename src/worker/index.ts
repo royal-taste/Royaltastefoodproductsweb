@@ -2,13 +2,15 @@ import { Hono } from "hono";
 import { cors } from 'hono/cors';
 import { zValidator } from '@hono/zod-validator';
 import { ContactFormSchema } from '../shared/types';
+import { sql } from '@vercel/postgres';
 
 interface Env {
-  DB?: any;
+  POSTGRES_URL?: string;
+  POSTGRES_HOST?: string;
+  POSTGRES_DATABASE?: string;
+  POSTGRES_USERNAME?: string;
+  POSTGRES_PASSWORD?: string;
 }
-
-// Simple in-memory storage for contact submissions (for Vercel deployment)
-const contactSubmissions: any[] = [];
 
 // Simple logging function for production
 const logError = (_message: string, _error?: any) => {
@@ -71,7 +73,6 @@ app.onError((err, c) => {
   logError('Unhandled error:', err);
   
   // Don't expose internal errors in production
-  // In Cloudflare Workers, we'll use a simple approach
   const isProduction = !c.req.header('user-agent')?.includes('development');
   
   return c.json({
@@ -83,25 +84,47 @@ app.onError((err, c) => {
   }, 500);
 });
 
+// Initialize database table
+const initializeDatabase = async () => {
+  try {
+    await sql`
+      CREATE TABLE IF NOT EXISTS contact_submissions (
+        id SERIAL PRIMARY KEY,
+        first_name VARCHAR(50) NOT NULL,
+        last_name VARCHAR(50) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        phone VARCHAR(20),
+        subject VARCHAR(100) NOT NULL,
+        message TEXT NOT NULL,
+        status VARCHAR(20) DEFAULT 'new',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `;
+  } catch (error) {
+    logError('Database initialization error:', error);
+  }
+};
+
+// Initialize database on startup
+initializeDatabase();
+
 // Contact form submission endpoint
 app.post('/api/contact', rateLimit(5, 60000), zValidator('json', ContactFormSchema), async (c) => {
   try {
     const data = c.req.valid('json');
     
-    // Store in memory (for Vercel deployment)
-    const submission = {
-      id: Date.now(),
-      ...data,
-      created_at: new Date().toISOString(),
-      status: 'new'
-    };
-    
-    contactSubmissions.push(submission);
+    // Insert into database
+    const result = await sql`
+      INSERT INTO contact_submissions (first_name, last_name, email, phone, subject, message)
+      VALUES (${data.firstName}, ${data.lastName}, ${data.email}, ${data.phone || null}, ${data.subject}, ${data.message})
+      RETURNING id;
+    `;
 
     return c.json({
       success: true,
       message: 'Thank you for your message! We will get back to you soon.',
-      data: { id: submission.id }
+      data: { id: result.rows[0].id }
     });
 
   } catch (error) {
@@ -116,10 +139,15 @@ app.post('/api/contact', rateLimit(5, 60000), zValidator('json', ContactFormSche
 // Get all contact submissions
 app.get('/api/contact', async (c) => {
   try {
+    const result = await sql`
+      SELECT * FROM contact_submissions 
+      ORDER BY created_at DESC;
+    `;
+
     return c.json({
       success: true,
       message: 'Contact submissions retrieved successfully',
-      data: contactSubmissions
+      data: result.rows
     });
 
   } catch (error) {

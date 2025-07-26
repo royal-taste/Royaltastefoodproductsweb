@@ -20,9 +20,9 @@ A beautiful e-commerce website for authentic Kerala traditional food products bu
 
 - **Frontend**: React 19, TypeScript, Tailwind CSS
 - **Backend**: Hono.js
-- **Database**: SQLite (D1 for Cloudflare, better-sqlite3 for local)
+- **Database**: Vercel Postgres (production), SQLite (local development)
 - **Build Tool**: Vite
-- **Deployment**: Vercel (or Cloudflare Workers)
+- **Deployment**: Vercel
 
 ## Local Development Setup
 
@@ -132,7 +132,28 @@ CONTACT_NOTIFICATION_EMAIL=your-email@example.com
 - `VITE_WHATSAPP_NUMBER`: Your business WhatsApp number (without + or country code)
 - `CONTACT_NOTIFICATION_EMAIL`: Email for receiving contact form notifications (optional)
 
-### Step 4: Custom Domain (Optional)
+### Step 4: Set Up Vercel Postgres Database
+
+1. **In Vercel Dashboard:**
+   - Go to Storage tab
+   - Click "Create Database"
+   - Select "Postgres"
+   - Choose your region
+   - Click "Create"
+
+2. **Database Environment Variables:**
+   - Vercel will automatically add these environment variables:
+     - `POSTGRES_URL`
+     - `POSTGRES_HOST`
+     - `POSTGRES_DATABASE`
+     - `POSTGRES_USERNAME`
+     - `POSTGRES_PASSWORD`
+
+3. **Database Schema:**
+   - The contact_submissions table will be created automatically on first API call
+   - No manual setup required
+
+### Step 5: Custom Domain (Optional)
 
 1. In Vercel dashboard, go to Project Settings > Domains
 2. Add your custom domain
