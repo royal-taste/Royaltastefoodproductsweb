@@ -1,9 +1,0 @@
-
-CREATE TABLE admin_sessions (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  admin_id INTEGER NOT NULL,
-  token TEXT NOT NULL UNIQUE,
-  expires_at TIMESTAMP NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (admin_id) REFERENCES admin_users(id)
-);

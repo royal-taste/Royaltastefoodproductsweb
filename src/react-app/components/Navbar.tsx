@@ -37,9 +37,6 @@ export default function Navbar() {
             <Link to="/contact" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
               Contact
             </Link>
-            <Link to="/admin" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
-              Admin
-            </Link>
           </div>
 
           {/* Cart Icon */}
@@ -94,13 +91,6 @@ export default function Navbar() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </Link>
-              <Link
-                to="/admin"
-                className="block px-3 py-2 text-gray-700 hover:text-amber-600 transition-colors font-medium"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admin
               </Link>
             </div>
           </div>

@@ -13,9 +13,8 @@ A beautiful e-commerce website for authentic Kerala traditional food products bu
 - 📧 Newsletter signup
 - 🎨 Beautiful responsive design
 - 🌟 26 traditional Kerala products across 4 categories
-- 👨‍💼 Dual authentication system (Admin + Customer)
-- 📊 Admin dashboard with inventory management
-- 🔐 Secure role-based access control
+- 📊 Contact form submissions management
+- 🔐 Secure form validation and rate limiting
 
 ## Tech Stack
 
@@ -127,14 +126,11 @@ In your Vercel dashboard, go to Project Settings > Environment Variables and add
 NODE_ENV=production
 VITE_WHATSAPP_NUMBER=your_actual_whatsapp_number
 CONTACT_NOTIFICATION_EMAIL=your-email@example.com
-ADMIN_SETUP_KEY=your_secure_setup_key_here
 ```
 
-**Important Security Notes:**
-- `ADMIN_SETUP_KEY`: A secure random string used only once to create the admin user
+**Important Notes:**
 - `VITE_WHATSAPP_NUMBER`: Your business WhatsApp number (without + or country code)
-- Generate a strong `ADMIN_SETUP_KEY` (e.g., using a password generator)
-- After creating the admin user, you can remove the `ADMIN_SETUP_KEY` from environment variables
+- `CONTACT_NOTIFICATION_EMAIL`: Email for receiving contact form notifications (optional)
 
 ### Step 4: Custom Domain (Optional)
 
@@ -146,33 +142,12 @@ ADMIN_SETUP_KEY=your_secure_setup_key_here
 
 ### 🔒 Security Setup (Required)
 
-1. **Generate Admin Setup Key**
-   ```bash
-   # Generate a secure random key (32+ characters)
-   openssl rand -base64 32
-   ```
-
-2. **Set Environment Variables in Vercel**
+1. **Set Environment Variables in Vercel**
    ```
    NODE_ENV=production
    VITE_WHATSAPP_NUMBER=your_actual_whatsapp_number
-   ADMIN_SETUP_KEY=your_generated_setup_key
+   CONTACT_NOTIFICATION_EMAIL=your-email@example.com
    ```
-
-3. **Create Admin User (One-time setup)**
-   ```bash
-   # After deployment, make a POST request to create admin
-   curl -X POST https://your-domain.vercel.app/api/admin/setup \
-     -H "Content-Type: application/json" \
-     -d '{
-       "username": "admin",
-       "password": "your_secure_password",
-       "setupKey": "your_generated_setup_key"
-     }'
-   ```
-
-4. **Remove Setup Key**
-   - After creating admin user, remove `ADMIN_SETUP_KEY` from environment variables
 
 ### 🚀 Deployment Steps
 
@@ -180,25 +155,20 @@ ADMIN_SETUP_KEY=your_secure_setup_key_here
    - Connect your GitHub repository
    - Deploy automatically
 
-2. **Initialize Database**
-   - Visit `/admin` page
-   - Login with your admin credentials
-   - Click "Initialize Products" to populate sample data
-
-3. **Test Critical Functions**
+2. **Test Critical Functions**
    - Contact form submission
    - WhatsApp integration
-   - Admin login/logout
-   - Product management
+   - Product catalog display
+   - Shopping cart functionality
 
 ### 🔍 Post-Deployment Verification
 
-- [ ] Admin user created successfully
 - [ ] Contact form working
 - [ ] WhatsApp button functional
 - [ ] Rate limiting active
 - [ ] Security headers present
 - [ ] No console errors in production
+- [ ] Product images loading correctly
 
 ## Project Structure
 
@@ -225,23 +195,6 @@ src/
 - `npm run check` - Type check and build verification
 
 ## Features Overview
-
-### Authentication System
-- **Admin Login**: Traditional username/password authentication
-  - Username: `admin`
-  - Password: `royalfp@!8472`
-  - Access to inventory management and analytics
-- **Customer Login**: Google OAuth for seamless user experience
-  - Account management and order history
-  - Secure session management
-
-### Admin Dashboard
-- Product inventory management
-- Real-time stock quantity tracking
-- Price management and updates
-- Order analytics and overview
-- Contact submissions management
-- Role-based access control
 
 ### Shopping Cart
 - Add products to cart with quantity selection

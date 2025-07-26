@@ -8,7 +8,6 @@ import AboutPage from "@/react-app/pages/About";
 import ProductsPage from "@/react-app/pages/Products";
 import ContactPage from "@/react-app/pages/Contact";
 import CartPage from "@/react-app/pages/Cart";
-import AdminPage from "@/react-app/pages/Admin";
 
 export default function App() {
   return (
@@ -23,7 +22,6 @@ export default function App() {
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/cart" element={<CartPage />} />
-              <Route path="/admin" element={<AdminPage />} />
             </Routes>
           </main>
           <Footer />
