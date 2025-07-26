@@ -2,15 +2,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "functions": {
-    "src/worker/index.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/src/worker/index.ts"
+      "destination": "/api/$1"
     },
     {
       "source": "/(.*)",
