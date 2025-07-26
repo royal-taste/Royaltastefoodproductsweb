@@ -1,3 +1,6 @@
 import app from '../src/worker/index.js';
 
-export default app; 
+// Export as Vercel serverless function
+export default async function handler(req, res) {
+  return app.fetch(req, res);
+} 
