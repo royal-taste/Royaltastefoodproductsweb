@@ -11,8 +11,8 @@ const products = [
     name: "Steamed Puttupodi",
     category: "Puttupodi",
     weightOptions: [
-      { weight: "500g", price: "₹85" },
-      { weight: "1kg", price: "₹160" }
+      { weight: "500g", price: "₹55" },
+      { weight: "1kg", price: "₹100" }
     ],
     rating: 4.8,
     image: "STEAMED PUTTU POWDER.jpg",
@@ -47,8 +47,8 @@ const products = [
     name: "Beetroot Puttupodi",
     category: "Puttupodi",
     weightOptions: [
-      { weight: "500g", price: "₹100" },
-      { weight: "1kg", price: "₹190" }
+      { weight: "500g", price: "₹110" },
+      { weight: "1kg", price: "₹220" }
     ],
     rating: 4.8,
     image: "BEETROOT PUTTU POWDER.jpg",
@@ -60,7 +60,7 @@ const products = [
     category: "Puttupodi",
     weightOptions: [
       { weight: "500g", price: "₹110" },
-      { weight: "1kg", price: "₹210" }
+      { weight: "1kg", price: "₹220" }
     ],
     rating: 4.9,
     image: "MORINGA LEAVES PUTTU POWDER.jpg",
@@ -95,8 +95,8 @@ const products = [
     name: "Tapioca Puttupodi",
     category: "Puttupodi",
     weightOptions: [
-      { weight: "500g", price: "₹80" },
-      { weight: "1kg", price: "₹150" }
+      { weight: "500g", price: "₹110" },
+      { weight: "1kg", price: "₹220" }
     ],
     rating: 4.6,
     image: "TAPIOCA PUTTU POWDER.jpg",
@@ -107,8 +107,8 @@ const products = [
     name: "Appam/Idiappam Puttupodi",
     category: "Puttupodi",
     weightOptions: [
-      { weight: "500g", price: "₹90" },
-      { weight: "1kg", price: "₹170" }
+      { weight: "500g", price: "₹45" },
+      { weight: "1kg", price: "₹85" }
     ],
     rating: 4.8,
     image: "APPAM.jpg",
@@ -126,10 +126,34 @@ const products = [
     image: "GROUND NUT PUTTU POWDER.jpg",
     description: "Protein-rich groundnut puttu powder with authentic Kerala taste."
   },
+  {
+    id: 11,
+    name: "Carrot Puttupodi",
+    category: "Puttupodi",
+    weightOptions: [
+      { weight: "500g", price: "₹110" },
+      { weight: "1kg", price: "₹220" }
+    ],
+    rating: 4.8,
+    image: "CARROT PUTTU POWDER.jpg",
+    description: "Nutritious carrot-infused puttu powder with natural sweetness and vibrant color."
+  },
+  {
+    id: 12,
+    name: "Jackfruit Puttupodi",
+    category: "Puttupodi",
+    weightOptions: [
+      { weight: "500g", price: "₹110" },
+      { weight: "1kg", price: "₹220" }
+    ],
+    rating: 4.9,
+    image: "JACKFRUIT PUTTU POWDER.jpg",
+    description: "Traditional jackfruit puttu powder with natural sweetness and rich flavor."
+  },
 
   // Powder Collection - Single rate for most, special rate for Green Chilli
   {
-    id: 11,
+    id: 13,
     name: "Carrot Rice Powder",
     category: "Powders",
     weightOptions: [
@@ -140,7 +164,7 @@ const products = [
     description: "Nutritious carrot-infused rice powder for baby food and health drinks."
   },
   {
-    id: 12,
+    id: 14,
     name: "Jack Fruit Powder",
     category: "Powders",
     weightOptions: [
@@ -151,7 +175,7 @@ const products = [
     description: "Natural jackfruit powder, rich in vitamins and minerals."
   },
   {
-    id: 13,
+    id: 15,
     name: "Sprouted Ragi Powder",
     category: "Powders",
     weightOptions: [
@@ -162,7 +186,7 @@ const products = [
     description: "Sprouted finger millet powder with enhanced nutritional value."
   },
   {
-    id: 14,
+    id: 16,
     name: "Corn Powder",
     category: "Powders",
     weightOptions: [
@@ -173,7 +197,7 @@ const products = [
     description: "Fine corn powder perfect for making traditional dishes."
   },
   {
-    id: 15,
+    id: 17,
     name: "Banana Powder",
     category: "Powders",
     weightOptions: [
@@ -184,7 +208,7 @@ const products = [
     description: "Natural banana powder, excellent for baby food and health drinks."
   },
   {
-    id: 16,
+    id: 18,
     name: "Muringa Leaves Powder",
     category: "Powders",
     weightOptions: [
@@ -195,7 +219,7 @@ const products = [
     description: "Pure moringa leaves powder, nature's multivitamin."
   },
   {
-    id: 17,
+    id: 19,
     name: "Carrot Powder",
     category: "Powders",
     weightOptions: [
@@ -206,7 +230,7 @@ const products = [
     description: "Pure carrot powder rich in beta-carotene and vitamins."
   },
   {
-    id: 18,
+    id: 19,
     name: "Beetroot Powder",
     category: "Powders",
     weightOptions: [
@@ -217,7 +241,7 @@ const products = [
     description: "Natural beetroot powder for coloring and nutrition."
   },
   {
-    id: 19,
+    id: 20,
     name: "Chilli Powder",
     category: "Powders",
     weightOptions: [
@@ -228,7 +252,7 @@ const products = [
     description: "Authentic Kerala red chilli powder with perfect heat and flavor."
   },
   {
-    id: 20,
+    id: 21,
     name: "Green Chilli Powder",
     category: "Powders",
     weightOptions: [
@@ -239,7 +263,7 @@ const products = [
     description: "Fresh green chilli powder for authentic Kerala cuisine."
   },
   {
-    id: 21,
+    id: 22,
     name: "Turmeric Powder",
     category: "Powders",
     weightOptions: [
@@ -250,7 +274,7 @@ const products = [
     description: "Pure Kerala turmeric powder with natural curcumin."
   },
   {
-    id: 22,
+    id: 23,
     name: "Coriander Powder",
     category: "Powders",
     weightOptions: [
@@ -263,7 +287,7 @@ const products = [
 
   // Rava Collection - Single rate
   {
-    id: 23,
+    id: 24,
     name: "Ragi Rava",
     category: "Rava",
     weightOptions: [
@@ -274,7 +298,7 @@ const products = [
     description: "Coarse finger millet rava for upma and traditional breakfast dishes."
   },
   {
-    id: 24,
+    id: 25,
     name: "Corn Rava",
     category: "Rava",
     weightOptions: [
@@ -287,18 +311,18 @@ const products = [
 
   // Ready Mixes Collection - Single rate
   {
-    id: 25,
+    id: 26,
     name: "Dosa/Idli Batter",
     category: "Ready Mixes",
     weightOptions: [
-      { weight: "500g", price: "₹45" }
+      { weight: "1kg", price: "₹45" }
     ],
     rating: 4.9,
     image: "DOSA.jpg",
     description: "Ready-to-use fermented batter for soft dosas and fluffy idlis."
   },
   {
-    id: 26,
+    id: 27,
     name: "Appam/Idiappam Mix",
     category: "Ready Mixes",
     weightOptions: [
@@ -351,7 +375,7 @@ export default function Products() {
             Our <span className="text-amber-700">Traditional Products</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-            Discover our carefully crafted collection of 26 authentic Kerala food products, 
+            Discover our carefully crafted collection of 28 authentic Kerala food products, 
             made with traditional recipes from Thiruvazhiyode, Palakkad.
           </p>
         </div>

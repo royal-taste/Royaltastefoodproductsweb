@@ -80,21 +80,21 @@ export default function About() {
             <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-200">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-white font-bold">10</span>
+                  <span className="text-white font-bold">12</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800">Puttupodi Collection</h3>
               </div>
               <p className="text-gray-600 mb-4">
                 Traditional puttu powders including steamed, ragi, greengram, beetroot, moringa leaves, 
-                wheat moringa, navara, tapioca, appam/idiappam, and groundnut varieties.
+                wheat moringa, navara, tapioca, appam/idiappam, groundnut, carrot, and jackfruit varieties.
               </p>
-              <div className="text-sm text-amber-700 font-medium">10 Premium Varieties Available</div>
+              <div className="text-sm text-amber-700 font-medium">12 Premium Varieties Available</div>
             </div>
 
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-200">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-white font-bold">12</span>
+                  <span className="text-white font-bold">13</span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-800">Powder Collection</h3>
               </div>
@@ -102,7 +102,7 @@ export default function About() {
                 Natural powders from vegetables, fruits, and spices including carrot, jackfruit, 
                 sprouted ragi, corn, banana, moringa, beetroot, and traditional spice powders.
               </p>
-              <div className="text-sm text-green-700 font-medium">12 Nutritious Options Available</div>
+              <div className="text-sm text-green-700 font-medium">13 Nutritious Options Available</div>
             </div>
 
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">

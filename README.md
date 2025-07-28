@@ -12,7 +12,7 @@ A beautiful e-commerce website for authentic Kerala traditional food products bu
 - 💌 Contact form with database storage
 - 📧 Newsletter signup
 - 🎨 Beautiful responsive design
-- 🌟 26 traditional Kerala products across 4 categories
+- 🌟 28 traditional Kerala products across 4 categories
 - 📊 Contact form submissions management
 - 🔐 Secure form validation and rate limiting
 
@@ -223,7 +223,7 @@ src/
 - WhatsApp order integration with complete order details
 
 ### Product Catalog
-- 26 authentic Kerala food products
+- 28 authentic Kerala food products
 - 4 categories: Puttupodi, Powders, Rava, Ready Mixes
 - Quick view modal for product details
 - Product filtering by category

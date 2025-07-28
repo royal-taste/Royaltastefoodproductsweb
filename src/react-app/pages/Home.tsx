@@ -2,10 +2,6 @@ import { Link } from 'react-router';
 import { Star, Award, Truck, ChefHat, Heart, ArrowRight, MapPin } from 'lucide-react';
 import WhatsAppButton from '../components/WhatsAppButton';
 import AddToCartButton from '../components/AddToCartButton';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCreative } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-creative';
 
 // 1. Replace featured product image URLs with local filenames
 const featuredProducts = [
@@ -14,13 +10,13 @@ const featuredProducts = [
     name: "Steamed Puttupodi",
     image: "STEAMED PUTTU POWDER.jpg",
     weightOptions: [
-      { weight: "500g", price: "₹85" },
-      { weight: "1kg", price: "₹160" }
+      { weight: "500g", price: "₹55" },
+      { weight: "1kg", price: "₹100" }
     ],
     category: "Puttupodi"
   },
   {
-    id: 16,
+    id: 18,
     name: "Muringa Leaves Powder",
     image: "muringa leaves powder.jpg",
     weightOptions: [
@@ -70,7 +66,7 @@ export default function Home() {
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                 Traditional food products crafted with authentic Kerala recipes and the finest ingredients. 
-                Experience the taste of heritage with our 26 premium products from Palakkad.
+                Experience the taste of heritage with our 28 premium products from Palakkad.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
@@ -90,52 +86,12 @@ export default function Home() {
             </div>
             <div className="relative mt-0 md:mt-[-40px]">
               <div className="aspect-[9/16] w-full max-h-[70vh] md:pt-5 md:pb-8">
-                <Swiper
-                  modules={[Autoplay, EffectCreative]}
-                  autoplay={{ delay: 2200, disableOnInteraction: false }}
-                  effect="creative"
-                  creativeEffect={{
-                    prev: {
-                      shadow: true,
-                      translate: [0, 0, -400],
-                    },
-                    next: {
-                      translate: ['100%', 0, 0],
-                    },
-                  }}
-                  loop={true}
-                  allowTouchMove={false}
-                  navigation={false}
-                  pagination={false}
-                  className="rounded-2xl shadow-lg hover:shadow-xl transition-shadow h-full"
-                  style={{ width: '100%', height: '100%' }}
-                >
-                  <SwiperSlide><img src="/product-images/ALT.jpg" alt="ALT" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/APPAM.jpg" alt="APPAM" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/BEETROOT PUTTU POWDER.jpg" alt="BEETROOT PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/CARROT PUTTU POWDER.jpg" alt="CARROT PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/CHILLI.jpg" alt="CHILLI" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/CORIANDER.jpg" alt="CORIANDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/DOSA.jpg" alt="DOSA" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/GREEN CHILLI.jpg" alt="GREEN CHILLI" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/GREENGRAM PUTTU POWDER.jpg" alt="GREENGRAM PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/GROUND NUT PUTTU POWDER.jpg" alt="GROUND NUT PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/JACKFRUIT PUTTU POWDER.jpg" alt="JACKFRUIT PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/MORINGA LEAVES PUTTU POWDER.jpg" alt="MORINGA LEAVES PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/NAVARA PUTTU POWDER.jpg" alt="NAVARA PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/RAGI PUTTU POWDER.jpg" alt="RAGI PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/STEAMED PUTTU POWDER.jpg" alt="STEAMED PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/TAPIOCA PUTTU POWDER.jpg" alt="TAPIOCA PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/TURMERIC.jpg" alt="TURMERIC" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/WHEAT MORINGA PUTTU POWDER.jpg" alt="WHEAT MORINGA PUTTU POWDER" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/banana powder.jpg" alt="banana powder" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/carrot rice powder.jpg" alt="carrot rice powder" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/corn powder.jpg" alt="corn powder" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/corn rava.jpg" alt="corn rava" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/muringa leaves powder.jpg" alt="muringa leaves powder" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/ragi rava.jpg" alt="ragi rava" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                  <SwiperSlide><img src="/product-images/sprouted ragi powder.jpg" alt="sprouted ragi powder" className="w-full h-full object-cover rounded-2xl" style={{ aspectRatio: '9/16' }} /></SwiperSlide>
-                </Swiper>
+                <img 
+                  src="/assets/herosectionimage.png" 
+                  alt="Authentic Kerala Flavours" 
+                  className="w-full h-full object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+                  style={{ aspectRatio: '9/16' }}
+                />
               </div>
               <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full opacity-20"></div>
               <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full opacity-20"></div>
@@ -194,14 +150,14 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Product Categories</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              26 carefully crafted products across 4 traditional categories, each representing the essence of Kerala cuisine.
+              28 carefully crafted products across 4 traditional categories, each representing the essence of Kerala cuisine.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group">
               <div className="w-16 h-16 bg-gradient-to-br from-amber-600 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-white font-bold text-lg">10</span>
+                <span className="text-white font-bold text-lg">12</span>
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Puttupodi</h3>
               <p className="text-gray-600 text-sm">Traditional puttu powders including steamed, ragi, and specialty blends</p>
@@ -209,7 +165,7 @@ export default function Home() {
 
             <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center group">
               <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <span className="text-white font-bold text-lg">12</span>
+                <span className="text-white font-bold text-lg">13</span>
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Powders</h3>
               <p className="text-gray-600 text-sm">Natural powders from vegetables, fruits, and traditional spices</p>
@@ -291,7 +247,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold mb-2">26</div>
+              <div className="text-4xl font-bold mb-2">28</div>
               <div className="text-amber-100">Traditional Products</div>
             </div>
             <div>

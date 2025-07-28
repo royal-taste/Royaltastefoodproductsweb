@@ -141,23 +141,13 @@ export default function Contact() {
                   )}
                 </div>
                 
-                <button 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-amber-700 to-orange-600 text-white py-4 rounded-lg hover:from-amber-800 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                <WhatsAppButton
+                  message={`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`}
+                  className="w-full bg-gradient-to-r from-amber-700 to-orange-600 text-white py-4 rounded-lg hover:from-amber-800 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-2 font-medium"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </>
-                  )}
-                </button>
+                  <Send className="w-5 h-5" />
+                  Send Message
+                </WhatsAppButton>
               </form>
             </div>
 
@@ -182,7 +172,7 @@ export default function Contact() {
                       width="100%"
                       height="350"
                       style={{ border: 0 }}
-                      allowFullScreen=""
+                      allowFullScreen={true}
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Royal Taste Location"
@@ -196,7 +186,8 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-gray-800 mb-1">Phone</h3>
                       <p className="text-gray-600">
-                        WhatsApp: +91 98765 43210
+                        WhatsApp: +91 93880 51003/+91 93880 51005
+                                  
                       </p>
                     </div>
                   </div>
