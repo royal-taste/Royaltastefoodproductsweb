@@ -13,21 +13,29 @@ const featuredProducts = [
     id: 1,
     name: "Steamed Puttupodi",
     image: "STEAMED PUTTU POWDER.jpg",
-    price: "₹85",
+    weightOptions: [
+      { weight: "500g", price: "₹85" },
+      { weight: "1kg", price: "₹160" }
+    ],
     category: "Puttupodi"
   },
   {
     id: 16,
     name: "Muringa Leaves Powder",
     image: "muringa leaves powder.jpg",
-    price: "₹180",
+    weightOptions: [
+      { weight: "250g", price: "₹180" }
+    ],
     category: "Powders"
   },
   {
     id: 7,
     name: "Navara Puttupodi",
     image: "NAVARA PUTTU POWDER.jpg",
-    price: "₹150",
+    weightOptions: [
+      { weight: "500g", price: "₹150" },
+      { weight: "1kg", price: "₹290" }
+    ],
     category: "Puttupodi"
   }
 ];
@@ -258,7 +266,7 @@ export default function Home() {
                         <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <div className="text-xl font-bold text-amber-700">{product.price}</div>
+                    <div className="text-xl font-bold text-amber-700">{product.weightOptions[0].price}</div>
                   </div>
                   <AddToCartButton product={product} />
                 </div>

@@ -4,6 +4,7 @@ export interface CartItem {
   id: number;
   name: string;
   price: string;
+  weight: string;
   image: string;
   category: string;
   quantity: number;
@@ -12,8 +13,8 @@ export interface CartItem {
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Omit<CartItem, 'quantity'>) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  removeFromCart: (id: number, weight: string) => void;
+  updateQuantity: (id: number, weight: string, quantity: number) => void;
   clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
@@ -26,10 +27,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addToCart = (product: Omit<CartItem, 'quantity'>) => {
     setItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
+      const existingItem = prevItems.find(item => item.id === product.id && item.weight === product.weight);
       if (existingItem) {
         return prevItems.map(item =>
-          item.id === product.id
+          item.id === product.id && item.weight === product.weight
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -38,18 +39,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const removeFromCart = (id: number) => {
-    setItems(prevItems => prevItems.filter(item => item.id !== id));
+  const removeFromCart = (id: number, weight: string) => {
+    setItems(prevItems => prevItems.filter(item => !(item.id === id && item.weight === weight)));
   };
 
-  const updateQuantity = (id: number, quantity: number) => {
+  const updateQuantity = (id: number, weight: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(id);
+      removeFromCart(id, weight);
       return;
     }
     setItems(prevItems =>
       prevItems.map(item =>
-        item.id === id ? { ...item, quantity } : item
+        item.id === id && item.weight === weight ? { ...item, quantity } : item
       )
     );
   };

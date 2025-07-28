@@ -5,12 +5,15 @@ import QuickViewModal from '../components/QuickViewModal';
 import WhatsAppButton from '../components/WhatsAppButton';
 
 const products = [
-  // Puttupodi Collection
+  // Puttupodi Collection - Different rates for 500g and 1kg
   {
     id: 1,
     name: "Steamed Puttupodi",
     category: "Puttupodi",
-    price: "₹85",
+    weightOptions: [
+      { weight: "500g", price: "₹85" },
+      { weight: "1kg", price: "₹160" }
+    ],
     rating: 4.8,
     image: "STEAMED PUTTU POWDER.jpg",
     description: "Traditional Kerala steamed puttu powder made from finest rice."
@@ -19,7 +22,10 @@ const products = [
     id: 2,
     name: "Ragi Puttupodi",
     category: "Puttupodi",
-    price: "₹95",
+    weightOptions: [
+      { weight: "500g", price: "₹95" },
+      { weight: "1kg", price: "₹180" }
+    ],
     rating: 4.9,
     image: "RAGI PUTTU POWDER.jpg",
     description: "Nutritious finger millet puttu powder, rich in calcium and iron."
@@ -28,7 +34,10 @@ const products = [
     id: 3,
     name: "Greengram Puttupodi",
     category: "Puttupodi",
-    price: "₹90",
+    weightOptions: [
+      { weight: "500g", price: "₹90" },
+      { weight: "1kg", price: "₹170" }
+    ],
     rating: 4.7,
     image: "GREENGRAM PUTTU POWDER.jpg",
     description: "High-protein green gram puttu powder for healthy breakfast."
@@ -37,7 +46,10 @@ const products = [
     id: 4,
     name: "Beetroot Puttupodi",
     category: "Puttupodi",
-    price: "₹100",
+    weightOptions: [
+      { weight: "500g", price: "₹100" },
+      { weight: "1kg", price: "₹190" }
+    ],
     rating: 4.8,
     image: "BEETROOT PUTTU POWDER.jpg",
     description: "Natural beetroot-infused puttu powder with vibrant color and taste."
@@ -46,7 +58,10 @@ const products = [
     id: 5,
     name: "Muringa Leaves Puttupodi",
     category: "Puttupodi",
-    price: "₹110",
+    weightOptions: [
+      { weight: "500g", price: "₹110" },
+      { weight: "1kg", price: "₹210" }
+    ],
     rating: 4.9,
     image: "MORINGA LEAVES PUTTU POWDER.jpg",
     description: "Superfood moringa leaves mixed puttu powder, packed with nutrients."
@@ -55,7 +70,10 @@ const products = [
     id: 6,
     name: "Wheat Muringa Leaves Puttupodi",
     category: "Puttupodi",
-    price: "₹105",
+    weightOptions: [
+      { weight: "500g", price: "₹105" },
+      { weight: "1kg", price: "₹200" }
+    ],
     rating: 4.7,
     image: "WHEAT MORINGA PUTTU POWDER.jpg",
     description: "Wholesome wheat and moringa combination for nutritious puttu."
@@ -64,7 +82,10 @@ const products = [
     id: 7,
     name: "Navara Puttupodi",
     category: "Puttupodi",
-    price: "₹150",
+    weightOptions: [
+      { weight: "500g", price: "₹150" },
+      { weight: "1kg", price: "₹290" }
+    ],
     rating: 4.9,
     image: "NAVARA PUTTU POWDER.jpg",
     description: "Premium Navara rice puttu powder, an ancient Kerala medicinal rice."
@@ -73,7 +94,10 @@ const products = [
     id: 8,
     name: "Tapioca Puttupodi",
     category: "Puttupodi",
-    price: "₹80",
+    weightOptions: [
+      { weight: "500g", price: "₹80" },
+      { weight: "1kg", price: "₹150" }
+    ],
     rating: 4.6,
     image: "TAPIOCA PUTTU POWDER.jpg",
     description: "Traditional tapioca puttu powder, a Kerala breakfast staple."
@@ -82,7 +106,10 @@ const products = [
     id: 9,
     name: "Appam/Idiappam Puttupodi",
     category: "Puttupodi",
-    price: "₹90",
+    weightOptions: [
+      { weight: "500g", price: "₹90" },
+      { weight: "1kg", price: "₹170" }
+    ],
     rating: 4.8,
     image: "APPAM.jpg",
     description: "Specially processed rice flour for making soft appam and idiappam."
@@ -91,18 +118,23 @@ const products = [
     id: 10,
     name: "Groundnut Puttupodi",
     category: "Puttupodi",
-    price: "₹120",
+    weightOptions: [
+      { weight: "500g", price: "₹120" },
+      { weight: "1kg", price: "₹230" }
+    ],
     rating: 4.7,
     image: "GROUND NUT PUTTU POWDER.jpg",
     description: "Protein-rich groundnut puttu powder with authentic Kerala taste."
   },
 
-  // Powder Collection
+  // Powder Collection - Single rate for most, special rate for Green Chilli
   {
     id: 11,
     name: "Carrot Rice Powder",
     category: "Powders",
-    price: "₹95",
+    weightOptions: [
+      { weight: "250g", price: "₹95" }
+    ],
     rating: 4.8,
     image: "carrot rice powder.jpg",
     description: "Nutritious carrot-infused rice powder for baby food and health drinks."
@@ -111,7 +143,9 @@ const products = [
     id: 12,
     name: "Jack Fruit Powder",
     category: "Powders",
-    price: "₹140",
+    weightOptions: [
+      { weight: "250g", price: "₹140" }
+    ],
     rating: 4.9,
     image: "JACKFRUIT PUTTU POWDER.jpg",
     description: "Natural jackfruit powder, rich in vitamins and minerals."
@@ -120,7 +154,9 @@ const products = [
     id: 13,
     name: "Sprouted Ragi Powder",
     category: "Powders",
-    price: "₹110",
+    weightOptions: [
+      { weight: "250g", price: "₹110" }
+    ],
     rating: 4.8,
     image: "sprouted ragi powder.jpg",
     description: "Sprouted finger millet powder with enhanced nutritional value."
@@ -129,7 +165,9 @@ const products = [
     id: 14,
     name: "Corn Powder",
     category: "Powders",
-    price: "₹85",
+    weightOptions: [
+      { weight: "250g", price: "₹85" }
+    ],
     rating: 4.7,
     image: "corn powder.jpg",
     description: "Fine corn powder perfect for making traditional dishes."
@@ -138,7 +176,9 @@ const products = [
     id: 15,
     name: "Banana Powder",
     category: "Powders",
-    price: "₹130",
+    weightOptions: [
+      { weight: "250g", price: "₹130" }
+    ],
     rating: 4.9,
     image: "banana powder.jpg",
     description: "Natural banana powder, excellent for baby food and health drinks."
@@ -147,7 +187,9 @@ const products = [
     id: 16,
     name: "Muringa Leaves Powder",
     category: "Powders",
-    price: "₹180",
+    weightOptions: [
+      { weight: "250g", price: "₹180" }
+    ],
     rating: 4.9,
     image: "muringa leaves powder.jpg",
     description: "Pure moringa leaves powder, nature's multivitamin."
@@ -156,7 +198,9 @@ const products = [
     id: 17,
     name: "Carrot Powder",
     category: "Powders",
-    price: "₹120",
+    weightOptions: [
+      { weight: "250g", price: "₹120" }
+    ],
     rating: 4.8,
     image: "CARROT PUTTU POWDER.jpg",
     description: "Pure carrot powder rich in beta-carotene and vitamins."
@@ -165,7 +209,9 @@ const products = [
     id: 18,
     name: "Beetroot Powder",
     category: "Powders",
-    price: "₹115",
+    weightOptions: [
+      { weight: "250g", price: "₹115" }
+    ],
     rating: 4.7,
     image: "BEETROOT PUTTU POWDER.jpg",
     description: "Natural beetroot powder for coloring and nutrition."
@@ -174,7 +220,9 @@ const products = [
     id: 19,
     name: "Chilli Powder",
     category: "Powders",
-    price: "₹60",
+    weightOptions: [
+      { weight: "250g", price: "₹60" }
+    ],
     rating: 4.8,
     image: "CHILLI.jpg",
     description: "Authentic Kerala red chilli powder with perfect heat and flavor."
@@ -183,7 +231,9 @@ const products = [
     id: 20,
     name: "Green Chilli Powder",
     category: "Powders",
-    price: "₹70",
+    weightOptions: [
+      { weight: "200g", price: "₹70" }
+    ],
     rating: 4.7,
     image: "GREEN CHILLI.jpg",
     description: "Fresh green chilli powder for authentic Kerala cuisine."
@@ -192,7 +242,9 @@ const products = [
     id: 21,
     name: "Turmeric Powder",
     category: "Powders",
-    price: "₹50",
+    weightOptions: [
+      { weight: "250g", price: "₹50" }
+    ],
     rating: 4.9,
     image: "TURMERIC.jpg",
     description: "Pure Kerala turmeric powder with natural curcumin."
@@ -201,18 +253,22 @@ const products = [
     id: 22,
     name: "Coriander Powder",
     category: "Powders",
-    price: "₹45",
+    weightOptions: [
+      { weight: "250g", price: "₹45" }
+    ],
     rating: 4.8,
     image: "CORIANDER.jpg",
     description: "Freshly ground coriander powder with aromatic fragrance."
   },
 
-  // Rava Collection
+  // Rava Collection - Single rate
   {
     id: 23,
     name: "Ragi Rava",
     category: "Rava",
-    price: "₹75",
+    weightOptions: [
+      { weight: "500g", price: "₹75" }
+    ],
     rating: 4.8,
     image: "ragi rava.jpg",
     description: "Coarse finger millet rava for upma and traditional breakfast dishes."
@@ -221,18 +277,22 @@ const products = [
     id: 24,
     name: "Corn Rava",
     category: "Rava",
-    price: "₹70",
+    weightOptions: [
+      { weight: "500g", price: "₹70" }
+    ],
     rating: 4.7,
     image: "corn rava.jpg",
     description: "Coarse corn rava perfect for upma and Kerala breakfast items."
   },
 
-  // Ready Mixes Collection
+  // Ready Mixes Collection - Single rate
   {
     id: 25,
     name: "Dosa/Idli Batter",
     category: "Ready Mixes",
-    price: "₹45",
+    weightOptions: [
+      { weight: "500g", price: "₹45" }
+    ],
     rating: 4.9,
     image: "DOSA.jpg",
     description: "Ready-to-use fermented batter for soft dosas and fluffy idlis."
@@ -241,7 +301,9 @@ const products = [
     id: 26,
     name: "Appam/Idiappam Mix",
     category: "Ready Mixes",
-    price: "₹55",
+    weightOptions: [
+      { weight: "500g", price: "₹55" }
+    ],
     rating: 4.8,
     image: "APPAM.jpg",
     description: "Instant mix for preparing authentic Kerala appam and idiappam."
@@ -361,7 +423,16 @@ export default function Products() {
                       ))}
                       <span className="text-sm text-gray-600 ml-2">({product.rating})</span>
                     </div>
-                    <div className="text-2xl font-bold text-amber-700">{product.price}</div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-amber-700">
+                        {product.weightOptions[0].price}
+                      </div>
+                      {product.weightOptions.length > 1 && (
+                        <div className="text-sm text-gray-500">
+                          {product.weightOptions.length} weight options
+                        </div>
+                      )}
+                    </div>
                   </div>
                   
                   <AddToCartButton 

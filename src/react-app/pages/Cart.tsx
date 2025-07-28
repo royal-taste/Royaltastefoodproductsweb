@@ -25,6 +25,7 @@ export default function Cart() {
     items.forEach((item, index) => {
       message += `${index + 1}. ${item.name}\n`;
       message += `   Category: ${item.category}\n`;
+      message += `   Weight: ${item.weight}\n`;
       message += `   Price: ${item.price} x ${item.quantity} = ₹${(parseFloat(item.price.replace('₹', '')) * item.quantity).toFixed(0)}\n\n`;
     });
 
@@ -92,7 +93,7 @@ export default function Cart() {
                   
                   <div className="flex-grow">
                     <h3 className="text-xl font-bold text-gray-800 mb-1">{item.name}</h3>
-                    <p className="text-gray-600 text-sm mb-2">{item.category}</p>
+                    <p className="text-gray-600 text-sm mb-2">{item.category} • {item.weight}</p>
                     <div className="text-2xl font-bold text-amber-700">{item.price}</div>
                   </div>
 
@@ -100,7 +101,7 @@ export default function Cart() {
                     {/* Quantity Controls */}
                     <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.id, item.weight, item.quantity - 1)}
                         className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white transition-colors text-gray-600 hover:text-amber-700"
                       >
                         <Minus className="w-4 h-4" />
@@ -109,7 +110,7 @@ export default function Cart() {
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.id, item.weight, item.quantity + 1)}
                         className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white transition-colors text-gray-600 hover:text-amber-700"
                       >
                         <Plus className="w-4 h-4" />
@@ -118,7 +119,7 @@ export default function Cart() {
 
                     {/* Remove Button */}
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.id, item.weight)}
                       className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors text-gray-400 hover:text-red-600"
                     >
                       <Trash2 className="w-5 h-5" />

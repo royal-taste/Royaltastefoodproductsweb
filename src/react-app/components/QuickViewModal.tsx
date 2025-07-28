@@ -2,11 +2,16 @@ import { X, Star } from 'lucide-react';
 import { useEffect } from 'react';
 import AddToCartButton from './AddToCartButton';
 
+interface WeightOption {
+  weight: string;
+  price: string;
+}
+
 interface Product {
   id: number;
   name: string;
   category: string;
-  price: string;
+  weightOptions: WeightOption[];
   rating: number;
   image: string;
   description: string;
@@ -101,8 +106,15 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                 {product.description}
               </p>
 
-              <div className="text-4xl font-bold text-amber-700 mb-8">
-                {product.price}
+              <div className="mb-8">
+                <div className="text-2xl font-bold text-amber-700 mb-2">
+                  Starting from {product.weightOptions[0].price}
+                </div>
+                {product.weightOptions.length > 1 && (
+                  <div className="text-sm text-gray-600">
+                    Available in {product.weightOptions.length} different weights
+                  </div>
+                )}
               </div>
             </div>
 
