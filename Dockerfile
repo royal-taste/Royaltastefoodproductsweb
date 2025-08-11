@@ -12,6 +12,6 @@ RUN npm ci
 COPY . .
 
 # Build the app for production
-RUN npm run build
+#RUN npm run build
 
 CMD ["npm", "run", "dev"]
